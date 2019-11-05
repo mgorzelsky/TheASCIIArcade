@@ -34,9 +34,6 @@ namespace Snake
 
             Console.Clear();
             Console.CursorVisible = false;
-            Console.SetWindowSize(1, 1);
-            Console.SetBufferSize(SnakeProgram.width, SnakeProgram.height);
-            Console.SetWindowSize(SnakeProgram.width, SnakeProgram.height);
 
             timer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
             timer.Start();
@@ -116,10 +113,10 @@ namespace Snake
             Point snakeHeadPosition = newSnakePosition[0];
 
             //Does the snake run out of the game area?
-            if (snakeHeadPosition.Y < 0 || 
-                snakeHeadPosition.Y > SnakeProgram.height - 1 || 
-                snakeHeadPosition.X < 0 || 
-                snakeHeadPosition.X > SnakeProgram.width - 1)
+            if (snakeHeadPosition.Y < 1 || 
+                snakeHeadPosition.Y > SnakeProgram.height - 2 || 
+                snakeHeadPosition.X < 1 || 
+                snakeHeadPosition.X > SnakeProgram.width - 2)
                 return true;
 
             //Does the snake run into itself?
