@@ -1,127 +1,105 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Timers;
+using TMR = System.Timers;
 using System.Drawing;
+using System.Threading;
 
 namespace FlappyBird
 {
     public enum CellState { Empty, Bird, Pillar };
     public class Game
     {
-        CellState[,] state;
+        public static CellState[,] state;
         int score;
         public int HighScore { get; private set; }
-        public bool PlayAgain { get; private set; }
-        bool gameOver;
-        int height;
-        int width;
+        bool gameOver = false;
         Render render = new Render();
+        private int stepCounter = 1;
 
         Bird bird;
-        //Walls wall = new Walls();
-        Timer wallGenerator = new Timer(5000);
-        Timer gameTimer = new Timer(100);
-        List<Walls> walls = new List<Walls>();
+        public static TMR.Timer gameStep;
+        List<Wall> listOfWalls = new List<Wall>();
 
         public Game()
         {
+            gameStep = new TMR.Timer(50);
             bird = new Bird();
-
-
-            wallGenerator.Elapsed += new ElapsedEventHandler(OnTimedEvent);
-            wallGenerator.Enabled = true;
-            gameTimer.Elapsed += new ElapsedEventHandler(GameLoop);
-            gameTimer.Enabled = true;     
+            gameStep.Elapsed += new TMR.ElapsedEventHandler(onGameStep);
         }
 
-        public void PlayGame(int height, int width)
+        public void PlayGame()
         {
-            this.height = height;
-            this.width = width;
+            Thread inputThread = new Thread(WaitForInput);
+            inputThread.Start();
+
+            gameStep.Start();
 
             Console.CursorVisible = false;
-            ConsoleKey action = ConsoleKey.H;
 
             gameOver = false;
-            do
+            while (!gameOver)
             {
-                //while (action != ConsoleKey.Q)
-                //{
-                if (gameOver != true)
+                state = new CellState[FlappyBirdProgram.width, FlappyBirdProgram.height];
+                state[bird.Position.X, bird.Position.Y] = CellState.Bird;
+                foreach (var wall in listOfWalls)
                 {
-
-                    action = Console.ReadKey().Key;
-                    if (action == ConsoleKey.UpArrow)
+                    int[] wallArray = wall.getWall();
+                    for (int y = 0; y < wallArray.Length; y++)
                     {
-                        bird.Flap();
-                        //Step();
-                        //render.DrawScreen(state, height, width);
+                        if (wallArray[y] == 0 && y < FlappyBirdProgram.height)
+                            state[wall.getCurrentX(), y] = CellState.Pillar;
                     }
                 }
-                //}
+                CheckCollision();
+                render.DrawScreen();
             }
-            while (gameOver != true);
 
-            
-
-            //do
-            //{
-            //    Step();
-
+            gameStep.Dispose();
             Console.Clear();
             Console.SetCursorPosition(39, 19);
             Console.WriteLine("Game Over!");
-            Console.ReadKey();
-        }
-
-        void Step()
-        {
-            state = new CellState[height, width];
-            int birdX = bird.getX();
-            int birdY = bird.getY();
-            state[birdY, birdX] = CellState.Bird;
-            foreach(var wall in walls)
-            {
-                int[] wallArray = wall.getWall();
-                for (int y = 0; y < wallArray.Length; y++)
-                {
-                    if (wallArray[y] == 0)
-                        state[y, wall.getCurrentX()] = CellState.Pillar;
-                }
-            }
-            CheckCollision();
         }
 
         void CheckCollision()
         {
-            if (bird.getY() < 1 || bird.getY() > height - 2)
+            if (bird.Position.Y < 1 || bird.Position.Y > FlappyBirdProgram.height - 2)
             {
                 gameOver = true;
-                gameTimer.Stop();
             }
-            foreach (var wall in walls)
+            for (int i = 0; i < listOfWalls.Count; i++)
             {
-                if (wall.getCurrentX() == bird.getX())
+                if (listOfWalls[i].getCurrentX() == bird.Position.X)
                 {
-                    if (wall.getWall()[bird.getY()] == 0)
+                    if (listOfWalls[i].getWall()[bird.Position.Y] == 0)
                     {
                         gameOver = true;
-                        gameTimer.Stop();
                     }
                 }
+                if (listOfWalls[i].getCurrentX() == 0)
+                    listOfWalls.RemoveAt(i);
             }
         }
 
-        public void OnTimedEvent(Object source, ElapsedEventArgs e)
+        private void onGameStep(object sender, TMR.ElapsedEventArgs e)
         {
-            walls.Add(new Walls());
+            stepCounter++;
+            if (stepCounter == 75)
+            {
+                listOfWalls.Add(new Wall());
+                stepCounter = 1;
+            }
         }
 
-        public void GameLoop(Object source, ElapsedEventArgs e)
+        private void WaitForInput()
         {
-            Step();
-            render.DrawScreen(state, height, width);
+            while (!gameOver)
+            {
+                if (Console.ReadKey(true).Key == ConsoleKey.UpArrow)
+                {
+                    bird.Flap();
+                }
+            }
         }
 
 
