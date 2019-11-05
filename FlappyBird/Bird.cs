@@ -21,6 +21,8 @@ namespace FlappyBird
         public void Flap()
         {
             position.Y -= 3;
+            if (position.Y < 0)
+                position.Y = 0;
         }
 
         public void Drop()

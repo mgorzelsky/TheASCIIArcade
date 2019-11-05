@@ -24,8 +24,6 @@ namespace FlappyBird
                 Thread.Sleep(2000);
                 game.PlayGame();
             } while (true);
-
-            Game.gameStep.Dispose();
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace FlappyBird
 {
-    public class Walls
+    public class Wall
     {
 
         private int currentX = FlappyBirdProgram.width - 1; // starts at the right edge of the screen
@@ -19,7 +19,7 @@ namespace FlappyBird
 
 
 
-        public Walls()
+        public Wall()
         {
             Game.gameStep.Elapsed += new ElapsedEventHandler(onGameStep);
             rnd = new Random();

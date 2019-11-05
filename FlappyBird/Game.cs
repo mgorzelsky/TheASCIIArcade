@@ -18,11 +18,12 @@ namespace FlappyBird
         private int stepCounter = 1;
 
         Bird bird;
-        public static TMR.Timer gameStep = new TMR.Timer(50);
-        List<Walls> walls = new List<Walls>();
+        public static TMR.Timer gameStep;
+        List<Wall> listOfWalls = new List<Wall>();
 
         public Game()
         {
+            gameStep = new TMR.Timer(50);
             bird = new Bird();
             gameStep.Elapsed += new TMR.ElapsedEventHandler(onGameStep);
         }
@@ -41,23 +42,20 @@ namespace FlappyBird
             {
                 state = new CellState[FlappyBirdProgram.width, FlappyBirdProgram.height];
                 state[bird.Position.X, bird.Position.Y] = CellState.Bird;
-                if (walls.Capacity != 0 && walls.Count != 0)
+                foreach (var wall in listOfWalls)
                 {
-                    foreach (var wall in walls)
+                    int[] wallArray = wall.getWall();
+                    for (int y = 0; y < wallArray.Length; y++)
                     {
-                        int[] wallArray = wall.getWall();
-                        for (int y = 0; y < wallArray.Length; y++)
-                        {
-                            if (wallArray[y] == 0 && y < FlappyBirdProgram.height)
-                                state[wall.getCurrentX(), y] = CellState.Pillar;
-                        }
+                        if (wallArray[y] == 0 && y < FlappyBirdProgram.height)
+                            state[wall.getCurrentX(), y] = CellState.Pillar;
                     }
                 }
                 CheckCollision();
                 render.DrawScreen();
             }
 
-            gameStep.Stop();
+            gameStep.Dispose();
             Console.Clear();
             Console.SetCursorPosition(39, 19);
             Console.WriteLine("Game Over!");
@@ -69,15 +67,17 @@ namespace FlappyBird
             {
                 gameOver = true;
             }
-            foreach (var wall in walls)
+            for (int i = 0; i < listOfWalls.Count; i++)
             {
-                if (wall.getCurrentX() == bird.Position.X)
+                if (listOfWalls[i].getCurrentX() == bird.Position.X)
                 {
-                    if (wall.getWall()[bird.Position.Y] == 0)
+                    if (listOfWalls[i].getWall()[bird.Position.Y] == 0)
                     {
                         gameOver = true;
                     }
                 }
+                if (listOfWalls[i].getCurrentX() == 0)
+                    listOfWalls.RemoveAt(i);
             }
         }
 
@@ -86,7 +86,7 @@ namespace FlappyBird
             stepCounter++;
             if (stepCounter == 75)
             {
-                walls.Add(new Walls());
+                listOfWalls.Add(new Wall());
                 stepCounter = 1;
             }
         }
