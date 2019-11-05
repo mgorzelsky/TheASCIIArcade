@@ -15,25 +15,24 @@ namespace FlappyBird
         public int HighScore { get; private set; }
         bool gameOver = false;
         Render render = new Render();
+        private int stepCounter = 1;
 
         Bird bird;
-        //Walls wall = new Walls();
-        TMR.Timer wallGenerator = new TMR.Timer(5000);
+        public static TMR.Timer gameStep = new TMR.Timer(50);
         List<Walls> walls = new List<Walls>();
 
         public Game()
         {
             bird = new Bird();
-
-
-            wallGenerator.Elapsed += new TMR.ElapsedEventHandler(OnTimedEvent);
-            wallGenerator.Enabled = true;
+            gameStep.Elapsed += new TMR.ElapsedEventHandler(onGameStep);
         }
 
         public void PlayGame()
         {
             Thread inputThread = new Thread(WaitForInput);
             inputThread.Start();
+
+            gameStep.Start();
 
             Console.CursorVisible = false;
 
@@ -42,7 +41,7 @@ namespace FlappyBird
             {
                 state = new CellState[FlappyBirdProgram.width, FlappyBirdProgram.height];
                 state[bird.Position.X, bird.Position.Y] = CellState.Bird;
-                if (walls.Count != 0 && walls.Capacity != 0)
+                if (walls.Capacity != 0 && walls.Count != 0)
                 {
                     foreach (var wall in walls)
                     {
@@ -58,6 +57,7 @@ namespace FlappyBird
                 render.DrawScreen();
             }
 
+            gameStep.Stop();
             Console.Clear();
             Console.SetCursorPosition(39, 19);
             Console.WriteLine("Game Over!");
@@ -81,9 +81,14 @@ namespace FlappyBird
             }
         }
 
-        public void OnTimedEvent(Object source, TMR.ElapsedEventArgs e)
+        private void onGameStep(object sender, TMR.ElapsedEventArgs e)
         {
-            walls.Add(new Walls());
+            stepCounter++;
+            if (stepCounter == 75)
+            {
+                walls.Add(new Walls());
+                stepCounter = 1;
+            }
         }
 
         private void WaitForInput()

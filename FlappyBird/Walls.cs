@@ -10,27 +10,25 @@ namespace FlappyBird
     public class Walls
     {
 
-        private Timer timer = new Timer(50);
         private int currentX = FlappyBirdProgram.width - 1; // starts at the right edge of the screen
         public int gap = 12;
         public int offset;
         Random rnd;
         private int speed = 1;
-        //private Render render = new Render();
         private int[] wall;
 
 
 
         public Walls()
         {
-            timer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
-            timer.Enabled = true;
+            Game.gameStep.Elapsed += new ElapsedEventHandler(onGameStep);
             rnd = new Random();
             wall = new int[FlappyBirdProgram.height];
             offset = FlappyBirdProgram.height - gap;
             WallBuilder();
 
         }
+
 
         // returns the current x position of the wall
         public int getCurrentX()
@@ -60,7 +58,7 @@ namespace FlappyBird
             }
         }
 
-        public void OnTimedEvent(Object source, ElapsedEventArgs e)
+        private void onGameStep(object sender, ElapsedEventArgs e)
         {
             Move();
         }

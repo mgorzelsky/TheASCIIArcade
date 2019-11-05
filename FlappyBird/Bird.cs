@@ -7,7 +7,7 @@ namespace FlappyBird
     public class Bird
     {
         private int gravity = 1;
-        private Timer timer = new Timer(500);
+        private int stepCounter = 1;
         private Point position;
         public Point Position { get { return position; } }
 
@@ -15,8 +15,7 @@ namespace FlappyBird
         {
             position.X = 20;
             position.Y = 5;
-            timer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
-            timer.Enabled = true;
+            Game.gameStep.Elapsed += new ElapsedEventHandler(onGameStep);
         }
 
         public void Flap()
@@ -29,9 +28,14 @@ namespace FlappyBird
             position.Y += gravity;
         }
 
-        public void OnTimedEvent(Object source, ElapsedEventArgs e)
+        private void onGameStep(object sender, ElapsedEventArgs e)
         {
-            Drop();
+            stepCounter++;
+            if (stepCounter == 10)
+            {
+                Drop();
+                stepCounter = 1;
+            }
         }
 
 
