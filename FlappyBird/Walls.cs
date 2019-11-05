@@ -11,12 +11,8 @@ namespace FlappyBird
     {
 
         private Timer timer = new Timer(50);
-        private int currentX = 159; // starts at the right edge of the screen
-        //private Point position = new Point(159, 0);
-        //private Point priorPosition = new Point(159, 0);
-        private int height = 40; // height is the screen size
-        //private int width = 2;
-        public int gap = 15;
+        private int currentX = FlappyBirdProgram.width - 1; // starts at the right edge of the screen
+        public int gap = 12;
         public int offset;
         Random rnd;
         private int speed = 1;
@@ -30,8 +26,8 @@ namespace FlappyBird
             timer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
             timer.Enabled = true;
             rnd = new Random();
-            wall = new int[height];
-            offset = height - gap;
+            wall = new int[FlappyBirdProgram.height];
+            offset = FlappyBirdProgram.height - gap;
             WallBuilder();
 
         }

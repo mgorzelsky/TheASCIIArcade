@@ -5,23 +5,27 @@ namespace FlappyBird
 {
     public class Render
     {
-        public void DrawScreen(CellState[,] gameState, int height, int width)
+        public void DrawScreen()
         {
-            StringBuilder screenAsString = new StringBuilder("", height * width);
+            StringBuilder screenAsString = new StringBuilder("", FlappyBirdProgram.width * FlappyBirdProgram.height);
             char currentCharacter = Convert.ToChar(32);
-            for (int y = 0; y < height; y++)
+            for (int y = 0; y < FlappyBirdProgram.height; y++)
             {
                 screenAsString.Clear();
-                for (int x = 0; x < width; x++)
+                for (int x = 0; x < FlappyBirdProgram.width; x++)
                 {
                     if (y == 0)
                         currentCharacter = '-';
-                    if (y == 39)
+                    else if (y == FlappyBirdProgram.height - 1)
                         currentCharacter = '-';
-                    if (y > 0 && y < height - 1)
+                    else if (x == 0)
+                        currentCharacter = '|';
+                    else if (x == FlappyBirdProgram.width - 1)
+                        currentCharacter = '|';
+                    else if (y > 0 && y < FlappyBirdProgram.height - 1)
                     {
 
-                        switch (gameState[y, x])
+                        switch (Game.state[x, y])
                         {
                             case (CellState.Empty):
                                 currentCharacter = Convert.ToChar(32);
@@ -37,77 +41,10 @@ namespace FlappyBird
                     screenAsString.Append(new char[] { currentCharacter });
 
                 }
+                Console.CursorVisible = false;
                 Console.SetCursorPosition(0, y);
-                Console.WriteLine(screenAsString);
-            }
-            //Console.SetCursorPosition(0, 0);
-            //Console.WriteLine(screenAsString);
-        }
-        
-        
-        
-        
-        
-        
-        /*
-        public Render()
-        {
-        }
-
-        public void drawBird(Bird bird)
-        {
-            Console.SetCursorPosition(bird.getX(), bird.getY());
-            Console.Write("*");
-            Console.SetCursorPosition(bird.getX(), bird.priorY);
-            Console.Write(" ");
-            
-        }
-
-        public void drawWalls(Walls wall)
-        {
-            int x = wall.getPosition().X;
-            //int y = wall.getPosition().Y;
-            int priorX = wall.getPriorPosition().X;
-            //int priorY = wall.getPriorPosition().Y;
-            //int height = wall.getHeight();
-            //int width = wall.getWidth();
-
-            //for(int i = 0; i < height;i++)
-            //{
-            //    Console.SetCursorPosition(x, y++);
-            //    Console.Write("<");
-            //    Console.SetCursorPosition(priorX, priorY++);
-            //    Console.Write(" ");
-
-            //}
-
-            //for (int i = 0; i < width; i++)
-            //{
-            //    Console.SetCursorPosition(x++, y);
-            //    Console.Write("<");
-            //    Console.SetCursorPosition(priorX++, priorY);
-            //    Console.Write(" ");
-
-            //}
-
-            //for (int i = 0; i <= height; i++)
-            //{
-            //    Console.SetCursorPosition(x, y--);
-            //    Console.Write("<");
-            //    Console.SetCursorPosition(priorX, priorY--);
-            //    Console.Write(" ");
-            //}
-            int[] pillar = wall.getWall();
-
-            for(int i = 0; i < 40; i++)
-            {
-                Console.SetCursorPosition(x, i);
-                if (pillar[i] == 0) Console.Write("<");
-                else Console.Write(" ");
-                Console.SetCursorPosition(priorX, i);
-                Console.Write(" ");
+                Console.Write(screenAsString);
             }
         }
-        */
     }
 }

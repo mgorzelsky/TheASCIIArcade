@@ -1,27 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Timers;
+using TMR = System.Timers;
 using System.Drawing;
+using System.Threading;
 
 namespace FlappyBird
 {
     public enum CellState { Empty, Bird, Pillar };
     public class Game
     {
-        CellState[,] state;
+        public static CellState[,] state;
         int score;
         public int HighScore { get; private set; }
         public bool PlayAgain { get; private set; }
-        bool gameOver;
-        int height;
-        int width;
+        bool gameOver = false;
         Render render = new Render();
 
         Bird bird;
         //Walls wall = new Walls();
-        Timer wallGenerator = new Timer(5000);
-        Timer gameTimer = new Timer(100);
+        TMR.Timer wallGenerator = new TMR.Timer(5000);
         List<Walls> walls = new List<Walls>();
 
         public Game()
@@ -29,45 +27,34 @@ namespace FlappyBird
             bird = new Bird();
 
 
-            wallGenerator.Elapsed += new ElapsedEventHandler(OnTimedEvent);
+            wallGenerator.Elapsed += new TMR.ElapsedEventHandler(OnTimedEvent);
             wallGenerator.Enabled = true;
-            gameTimer.Elapsed += new ElapsedEventHandler(GameLoop);
-            gameTimer.Enabled = true;     
         }
 
-        public void PlayGame(int height, int width)
+        public void PlayGame()
         {
-            this.height = height;
-            this.width = width;
+            Thread inputThread = new Thread(WaitForInput);
+            inputThread.Start();
 
             Console.CursorVisible = false;
-            ConsoleKey action = ConsoleKey.H;
 
             gameOver = false;
-            do
+            while (!gameOver)
             {
-                //while (action != ConsoleKey.Q)
-                //{
-                if (gameOver != true)
+                state = new CellState[FlappyBirdProgram.width, FlappyBirdProgram.height];
+                state[bird.getX(), bird.getY()] = CellState.Bird;
+                foreach (var wall in walls)
                 {
-
-                    action = Console.ReadKey().Key;
-                    if (action == ConsoleKey.UpArrow)
+                    int[] wallArray = wall.getWall();
+                    for (int y = 0; y < wallArray.Length; y++)
                     {
-                        bird.Flap();
-                        //Step();
-                        //render.DrawScreen(state, height, width);
+                        if (wallArray[y] == 0)
+                            state[wall.getCurrentX(), y] = CellState.Pillar;
                     }
                 }
-                //}
+                CheckCollision();
+                render.DrawScreen();
             }
-            while (gameOver != true);
-
-            
-
-            //do
-            //{
-            //    Step();
 
             Console.Clear();
             Console.SetCursorPosition(39, 19);
@@ -75,30 +62,11 @@ namespace FlappyBird
             Console.ReadKey();
         }
 
-        void Step()
-        {
-            state = new CellState[height, width];
-            int birdX = bird.getX();
-            int birdY = bird.getY();
-            state[birdY, birdX] = CellState.Bird;
-            foreach(var wall in walls)
-            {
-                int[] wallArray = wall.getWall();
-                for (int y = 0; y < wallArray.Length; y++)
-                {
-                    if (wallArray[y] == 0)
-                        state[y, wall.getCurrentX()] = CellState.Pillar;
-                }
-            }
-            CheckCollision();
-        }
-
         void CheckCollision()
         {
-            if (bird.getY() < 1 || bird.getY() > height - 2)
+            if (bird.getY() < 1 || bird.getY() > FlappyBirdProgram.height - 2)
             {
                 gameOver = true;
-                gameTimer.Stop();
             }
             foreach (var wall in walls)
             {
@@ -107,21 +75,31 @@ namespace FlappyBird
                     if (wall.getWall()[bird.getY()] == 0)
                     {
                         gameOver = true;
-                        gameTimer.Stop();
                     }
                 }
             }
         }
 
-        public void OnTimedEvent(Object source, ElapsedEventArgs e)
+        public void OnTimedEvent(Object source, TMR.ElapsedEventArgs e)
         {
             walls.Add(new Walls());
         }
 
-        public void GameLoop(Object source, ElapsedEventArgs e)
+        public void GameLoop(Object source, TMR.ElapsedEventArgs e)
         {
-            Step();
-            render.DrawScreen(state, height, width);
+            //Step();
+            //render.DrawScreen(state, height, width);
+        }
+
+        private void WaitForInput()
+        {
+            while (!gameOver)
+            {
+                if (Console.ReadKey(true).Key == ConsoleKey.UpArrow)
+                {
+                    bird.Flap();
+                }
+            }
         }
 
 
