@@ -13,7 +13,6 @@ namespace FlappyBird
         public static CellState[,] state;
         int score;
         public int HighScore { get; private set; }
-        public bool PlayAgain { get; private set; }
         bool gameOver = false;
         Render render = new Render();
 
@@ -42,14 +41,17 @@ namespace FlappyBird
             while (!gameOver)
             {
                 state = new CellState[FlappyBirdProgram.width, FlappyBirdProgram.height];
-                state[bird.getX(), bird.getY()] = CellState.Bird;
-                foreach (var wall in walls)
+                state[bird.Position.X, bird.Position.Y] = CellState.Bird;
+                if (walls.Count != 0 && walls.Capacity != 0)
                 {
-                    int[] wallArray = wall.getWall();
-                    for (int y = 0; y < wallArray.Length; y++)
+                    foreach (var wall in walls)
                     {
-                        if (wallArray[y] == 0)
-                            state[wall.getCurrentX(), y] = CellState.Pillar;
+                        int[] wallArray = wall.getWall();
+                        for (int y = 0; y < wallArray.Length; y++)
+                        {
+                            if (wallArray[y] == 0 && y < FlappyBirdProgram.height)
+                                state[wall.getCurrentX(), y] = CellState.Pillar;
+                        }
                     }
                 }
                 CheckCollision();
@@ -59,20 +61,19 @@ namespace FlappyBird
             Console.Clear();
             Console.SetCursorPosition(39, 19);
             Console.WriteLine("Game Over!");
-            Console.ReadKey();
         }
 
         void CheckCollision()
         {
-            if (bird.getY() < 1 || bird.getY() > FlappyBirdProgram.height - 2)
+            if (bird.Position.Y < 1 || bird.Position.Y > FlappyBirdProgram.height - 2)
             {
                 gameOver = true;
             }
             foreach (var wall in walls)
             {
-                if (wall.getCurrentX() == bird.getX())
+                if (wall.getCurrentX() == bird.Position.X)
                 {
-                    if (wall.getWall()[bird.getY()] == 0)
+                    if (wall.getWall()[bird.Position.Y] == 0)
                     {
                         gameOver = true;
                     }
@@ -83,12 +84,6 @@ namespace FlappyBird
         public void OnTimedEvent(Object source, TMR.ElapsedEventArgs e)
         {
             walls.Add(new Walls());
-        }
-
-        public void GameLoop(Object source, TMR.ElapsedEventArgs e)
-        {
-            //Step();
-            //render.DrawScreen(state, height, width);
         }
 
         private void WaitForInput()

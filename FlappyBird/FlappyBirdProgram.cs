@@ -16,15 +16,14 @@ namespace FlappyBird
             //Console.SetWindowSize(1, 1);
             //Console.SetBufferSize(width, height + 1);
             //Console.SetWindowSize(width, height + 1);
-
-            Game game = new Game();
-            Console.WriteLine("Welcome to flappy bird in the terminal.");
-            Thread.Sleep(2000);
-
+            
             do
             {
+                Game game = new Game();
+                Console.WriteLine("Welcome to flappy bird in the terminal.");
+                Thread.Sleep(2000);
                 game.PlayGame();
-            } while (game.PlayAgain);
+            } while (true);
         }
     }
 }

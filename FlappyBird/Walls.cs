@@ -32,35 +32,11 @@ namespace FlappyBird
 
         }
 
-
-
-        //public Point getPosition()
-        //{
-        //    return position;
-        //}
-
-        //public Point getPriorPosition()
-        //{
-        //    return priorPosition;
-        //}
-
-        //public int getHeight()
-        //{
-        //    return height;
-        //}
-
-        //public int getWidth()
-        //{
-        //    return width;
-        //}
-
         // returns the current x position of the wall
         public int getCurrentX()
         {
             return currentX;
         }
-
-
 
         // moves the x position of the wall 
         public void Move()
