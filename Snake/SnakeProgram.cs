@@ -5,7 +5,9 @@ namespace Snake
 {
     public class SnakeProgram
     {
-        private static List<int> scores = new List<int>();
+        public static int width = 50;
+        public static int height = 20;
+        private List<int> scores = new List<int>();
 
         //Provides a starting point for the game itself. Will be used later for menu options such as difficulty,
         //high scores, and restarting after loss.
@@ -14,7 +16,7 @@ namespace Snake
             bool playAgain = true;
             while (playAgain)
             {
-                Game game = new Game(40, 15);
+                Game game = new Game();
                 int score = game.PlayGame();
 
                 AddScoreToHighscores(score);
@@ -32,11 +34,11 @@ namespace Snake
             }
         }
 
-        public static List<int> GetScores()
+        public List<int> GetScores()
         {
             return scores;
         }
-        public static void AddScoreToHighscores(int recentScore)
+        public void AddScoreToHighscores(int recentScore)
         {
             scores.Add(recentScore);
             scores.Sort();
