@@ -4,7 +4,6 @@ using System.Threading;
 
 namespace FlappyBird
 {
-    //hi
     public class FlappyBirdProgram
     {
         public static int width = 120;

@@ -23,17 +23,17 @@ namespace Snake
         }
 
         // changes the position of the food on the screen randomly based on the size of the screen size sent in the width & height variables
-        public void ChangeFoodPosition(int width, int height, StateOfLocation[,] gameBoard)
+        public void ChangeFoodPosition()
         {
             bool tryAgain = false;
             do
             {
                 Random rand = new Random();
-                int newX = rand.Next(1, width);
-                int newY = rand.Next(1, height);
+                int newX = rand.Next(1, SnakeProgram.width);
+                int newY = rand.Next(1, SnakeProgram.height);
                 SetFoodPosition(newX, newY);
 
-                if (gameBoard[newX, newY] == StateOfLocation.Snake)
+                if (Game.gameBoard[newX, newY] == StateOfLocation.Snake)
                     tryAgain = true;
             }
             while (tryAgain);

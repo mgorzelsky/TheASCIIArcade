@@ -10,9 +10,9 @@ namespace TheASCIIArcade
         static void Main()
         {
             FlappyBirdProgram flappyBird = new FlappyBirdProgram();
-            flappyBird.StartFlappyBird();
+            //flappyBird.StartFlappyBird();
             SnakeProgram snake = new SnakeProgram();
-            //snake.StartSnake();
+            snake.StartSnake();
             PongProgram pong = new PongProgram();
             //pong.StartPong();
         }
