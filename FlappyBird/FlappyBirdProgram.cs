@@ -23,7 +23,7 @@ namespace FlappyBird
                 Console.WriteLine("Welcome to flappy bird in the terminal.");
                 Thread.Sleep(2000);
                 game.PlayGame();
-            } while (true);
+            } while (false);
         }
     }
 }
