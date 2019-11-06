@@ -31,22 +31,22 @@ namespace Snake
 
             Thread.Sleep(5000);
 
-            bool playAgain = true;
-            while (playAgain)
-            {
+            //bool playAgain = true;
+            //while (playAgain)
+            //{
                 Console.Clear();
                 Game game = new Game();
                 int score = game.PlayGame();
 
                 AddScoreToHighscores(score);
 
-                string playAgainMessage = "Play Again? Y/N";
-                Console.SetCursorPosition((width - playAgainMessage.Length) / 2, height / 2);
+                //string playAgainMessage = "Play Again? Y/N";
+                //Console.SetCursorPosition((width - playAgainMessage.Length) / 2, height / 2);
 
-                ConsoleKey playAgainChoice = Console.ReadKey(true).Key;
-                if (playAgainChoice != ConsoleKey.Y)
-                    playAgain = false;
-            }
+            //    ConsoleKey playAgainChoice = Console.ReadKey(true).Key;
+            //    if (playAgainChoice != ConsoleKey.Y)
+            //        playAgain = false;
+            //}
         }
 
         public List<int> GetScores()

@@ -105,7 +105,7 @@ namespace Snake
                 Console.Clear();
                 string gameOverMessage = "Game Over!";
                 string scoreMessage = $"Score: {score}";
-                string continueMessage = "Press any key to continue";
+                string continueMessage = "Press any key to quit";
                 Console.SetCursorPosition((SnakeProgram.width - gameOverMessage.Length) / 2, SnakeProgram.height / 2 - 1);
                 Console.Write(gameOverMessage);
                 Console.SetCursorPosition((SnakeProgram.width - scoreMessage.Length) / 2, SnakeProgram.height / 2);
