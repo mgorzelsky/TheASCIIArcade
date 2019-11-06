@@ -35,6 +35,7 @@ namespace TheASCIIArcade
             string contributers = "Contributers: Michael Gorzelsky";
             string instructions = @"Use the arrow ^ keys to move your selection, Enter| to confirm it." + "\0" +
                                    "            < V >                                <-";
+            string quitInstructions = "Press Q to quit";
 
             draw.DrawGenericScreen(arcadeLogo, (width - 73) / 2, 1);
             draw.DrawGenericScreen(instructions, (width - 67)/2, height - (height/3));
@@ -49,6 +50,7 @@ namespace TheASCIIArcade
             while (stillPlaying)
             {
                 Console.CursorVisible = false;
+                draw.DrawGenericScreen(quitInstructions, (width - quitInstructions.Length) / 2, height + 1);
 
                 draw.DrawLines("-", 0, (height / 2) - 1, width, false);
                 draw.DrawLines("|", (width / 2) - 1, 0, height, true);
