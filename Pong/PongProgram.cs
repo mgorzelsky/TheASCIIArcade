@@ -15,11 +15,11 @@ namespace Pong
             int width = 71;
             int height = 26;
 
-            string pongLogo = @"//==\\  //====\\  ||      ||   //===\\"  + "\a" +
-                              @"||  ||  ||    ||  ||\\    ||  //"        + "\a" +
-                              @"||==//  ||    ||  ||  \\  ||  ||   ===\" + "\a" +
-                              @"||      ||    ||  ||    \\||  \\     //" + "\a" +
-                              @"||      \\====//  ||      ||   \\===//"  + "\a";
+            string pongLogo = @"//==\\  //====\\  ||      ||   //===\\"  + "\0" +
+                              @"||  ||  ||    ||  ||\\    ||  //"        + "\0" +
+                              @"||==//  ||    ||  ||  \\  ||  ||   ===\" + "\0" +
+                              @"||      ||    ||  ||    \\||  \\     //" + "\0" +
+                              @"||      \\====//  ||      ||   \\===//"  + "\0";
             string contributers = "Contributers: Michael Gorzelsky";
             string instructions = "Left paddle A/Z for up/down    :    Right paddle UpArrow/DownArrow";
 
