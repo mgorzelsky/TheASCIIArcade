@@ -34,17 +34,14 @@ namespace Snake
             bool playAgain = true;
             while (playAgain)
             {
+                Console.Clear();
                 Game game = new Game();
                 int score = game.PlayGame();
 
                 AddScoreToHighscores(score);
 
-                Console.SetCursorPosition(10, 5);
-                Console.WriteLine("Game Over!");
-                Console.SetCursorPosition(10, 6);
-                Console.WriteLine("Score: {0}", score);
-                foreach (int s in scores)
-                    Console.Write($"{s} ");
+                string playAgainMessage = "Play Again? Y/N";
+                Console.SetCursorPosition((width - playAgainMessage.Length) / 2, height / 2);
 
                 ConsoleKey playAgainChoice = Console.ReadKey(true).Key;
                 if (playAgainChoice != ConsoleKey.Y)
