@@ -39,8 +39,8 @@ namespace TheASCIIArcade
             if (isVerticle)
                 for (int y = heightOffset; y < numberOfChars; y++)
                 {
-                        Console.SetCursorPosition(widthOffset, y);
-                        Console.Write(thingToDraw);
+                    Console.SetCursorPosition(widthOffset, y);
+                    Console.Write(thingToDraw);
                 }
             else
                 for (int x = widthOffset; x < numberOfChars; x++)
@@ -55,6 +55,7 @@ namespace TheASCIIArcade
             int flashIncrementer = 0;
             while (!Program.selectionIsMade)
             {
+                SquareEraser();
                 if (Program.currentSelection == new Point(0, 0))
                 {
                     FlashySquare(0, 0, flashIncrementer);
@@ -65,11 +66,11 @@ namespace TheASCIIArcade
                 }
                 if (Program.currentSelection == new Point(1, 0))
                 {
-                    FlashySquare(Program.width / 2, 0, flashIncrementer);
+                    FlashySquare(Program.width / 2 + 1, 0, flashIncrementer);
                 }
                 if (Program.currentSelection == new Point(1, 1))
                 {
-                    FlashySquare(Program.width / 2, Program.height / 2, flashIncrementer);
+                    FlashySquare(Program.width / 2 + 1, Program.height / 2, flashIncrementer);
                 }
                 flashIncrementer++;
                 if (flashIncrementer > 1)
@@ -87,33 +88,83 @@ namespace TheASCIIArcade
                     Console.SetCursorPosition(x, y);
                     if (flashIncrementer == 0)
                     {
-                        if (y == 0 + yOffset && x == 0 + xOffset)
+                        if (y == yOffset && x == xOffset)
                             Console.Write("+");
-                        else if (y == 0 && x == (Program.width / 2 - 3) + xOffset)
+                        else if (y == yOffset && x == (Program.width / 2 - 3) + xOffset)
                             Console.Write("+");
-                        else if (y == (Program.height / 2 - 2) + yOffset && x == 0)
+                        else if (y == (Program.height / 2 - 2) + yOffset && x == xOffset)
                             Console.Write("+");
                         else if (y == (Program.height / 2 - 2) + yOffset && x == (Program.width / 2 - 3) + xOffset)
                             Console.Write("+");
-                        else if (y == 0 || y == (Program.height / 2 - 2) + yOffset)
+                        else if (y == yOffset || y == (Program.height / 2 - 2) + yOffset)
                             Console.Write("-");
-                        else if (x == 0 || x == (Program.width / 2 - 3) + xOffset)
+                        else if (x == xOffset || x == (Program.width / 2 - 3) + xOffset)
                             Console.Write("|");
                     }
                     else
                     {
-                        if (y == 0 + yOffset && x == 0 + xOffset)
+                        if (y == yOffset && x == xOffset)
                             Console.Write("+", Color.Red);
-                        else if (y == 0 && x == (Program.width / 2 - 3) + xOffset)
+                        else if (y == yOffset && x == (Program.width / 2 - 3) + xOffset)
                             Console.Write("+", Color.Red);
-                        else if (y == (Program.height / 2 - 2) + yOffset && x == 0)
+                        else if (y == (Program.height / 2 - 2) + yOffset && x == xOffset)
                             Console.Write("+", Color.Red);
                         else if (y == (Program.height / 2 - 2) + yOffset && x == (Program.width / 2 - 3) + xOffset)
                             Console.Write("+", Color.Red);
-                        else if (y == 0 || y == (Program.height / 2 - 2) + yOffset)
+                        else if (y == yOffset || y == (Program.height / 2 - 2) + yOffset)
                             Console.Write("-", Color.Red);
-                        else if (x == 0 || x == (Program.width / 2 - 3) + xOffset)
+                        else if (x == xOffset || x == (Program.width / 2 - 3) + xOffset)
                             Console.Write("|", Color.Red);
+                    }
+                }
+            }
+        }
+        private void SquareEraser()
+        {
+            if (Program.currentSelection == new Point(0, 0))
+            {
+                Erase(0, Program.height / 2);
+                Erase(Program.width / 2 + 1, 0);
+                Erase(Program.width / 2 + 1, Program.height / 2);
+            }
+            if (Program.currentSelection == new Point(0, 1))
+            {
+                Erase(0, 0);
+                Erase(Program.width / 2 + 1, 0);
+                Erase(Program.width / 2 + 1, Program.height / 2);
+            }
+            if (Program.currentSelection == new Point(1, 0))
+            {
+                Erase(0, 0);
+                Erase(0, Program.height / 2);
+                Erase(Program.width / 2 + 1, Program.height / 2);
+            }
+            if (Program.currentSelection == new Point(1, 1))
+            {
+                Erase(0, 0);
+                Erase(0, Program.height / 2);
+                Erase(Program.width / 2 + 1, 0);
+            }
+
+            void Erase(int xOffset, int yOffset)
+            {
+                for (int y = yOffset; y < (Program.height / 2 - 1) + yOffset; y++)
+                {
+                    for (int x = xOffset; x < (Program.width / 2 - 2) + xOffset; x++)
+                    {
+                        Console.SetCursorPosition(x, y);
+                        if (y == yOffset && x == xOffset)
+                            Console.Write(" ");
+                        else if (y == yOffset && x == (Program.width / 2 - 3) + xOffset)
+                            Console.Write(" ");
+                        else if (y == (Program.height / 2 - 2) + yOffset && x == xOffset)
+                            Console.Write(" ");
+                        else if (y == (Program.height / 2 - 2) + yOffset && x == (Program.width / 2 - 3) + xOffset)
+                            Console.Write(" ");
+                        else if (y == yOffset || y == (Program.height / 2 - 2) + yOffset)
+                            Console.Write(" ");
+                        else if (x == xOffset || x == (Program.width / 2 - 3) + xOffset)
+                            Console.Write(" ");
                     }
                 }
             }

@@ -71,16 +71,35 @@ namespace TheASCIIArcade
                     switch (Console.ReadKey(true).Key)
                     {
                         case (ConsoleKey.UpArrow):
+                            if (currentSelection.Y - 1 < 0)
+                                currentSelection.Y = 0;
+                            else
+                                currentSelection.Y--;
                             break;
                         case (ConsoleKey.LeftArrow):
+                            if (currentSelection.X - 1 < 0)
+                                currentSelection.X = 0;
+                            else
+                                currentSelection.X--;
                             break;
                         case (ConsoleKey.DownArrow):
+                            if (currentSelection.Y + 1 > 1)
+                                currentSelection.Y = 1;
+                            else
+                                currentSelection.Y++;
                             break;
                         case (ConsoleKey.RightArrow):
+                            if (currentSelection.X + 1 > 1)
+                                currentSelection.X = 1;
+                            else
+                                currentSelection.X++;
                             break;
                         case (ConsoleKey.Enter):
                             selectionIsMade = true;
                             break;
+                        case (ConsoleKey.Q):
+                            selectionIsMade = true;
+                            return;
                     }
                 }
                 if (currentSelection == new Point(0, 0))
