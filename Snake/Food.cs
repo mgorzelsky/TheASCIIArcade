@@ -29,8 +29,8 @@ namespace Snake
             do
             {
                 Random rand = new Random();
-                int newX = rand.Next(1, SnakeProgram.width);
-                int newY = rand.Next(1, SnakeProgram.height);
+                int newX = rand.Next(2, SnakeProgram.width - 1);
+                int newY = rand.Next(2, SnakeProgram.height - 1);
                 SetFoodPosition(newX, newY);
 
                 if (Game.gameBoard[newX, newY] == StateOfLocation.Snake)

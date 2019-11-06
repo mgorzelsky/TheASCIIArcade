@@ -58,6 +58,31 @@ namespace Snake
             Console.SetCursorPosition(0, 0);
             Console.Write(screenBuffer);
         }
+        public void DrawGenericScreen(string thingToDraw, int widthOffset, int heightOffset)
+        {
+            Console.SetCursorPosition(widthOffset, heightOffset);
+            foreach (char character in thingToDraw)
+            {
+                if (character.Equals('\0'))
+                {
+                    heightOffset++;
+                    Console.SetCursorPosition(widthOffset, heightOffset);
+                }
+                if (!character.Equals('\0'))
+                    Console.Write(character);
+            }
+        }
+
+        public void DrawGenericScreen(string[] thingToDraw, int widthOffset, int heightOffset)
+        {
+            Console.SetCursorPosition(widthOffset, heightOffset);
+            foreach (string line in thingToDraw)
+            {
+                Console.SetCursorPosition(widthOffset, heightOffset);
+                Console.Write(line);
+                heightOffset++;
+            }
+        }
     }
 }
 

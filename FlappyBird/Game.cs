@@ -57,8 +57,11 @@ namespace FlappyBird
 
             gameStep.Dispose();
             Console.Clear();
-            Console.SetCursorPosition(39, 19);
+            Console.SetCursorPosition((FlappyBirdProgram.width - 10) / 2, FlappyBirdProgram.height / 2);
             Console.WriteLine("Game Over!");
+            Console.SetCursorPosition((FlappyBirdProgram.width - 21) / 2, FlappyBirdProgram.height / 2 + 1);
+            Console.WriteLine("Press any key to quit");
+            inputThread.Join();
         }
 
         void CheckCollision()
@@ -95,7 +98,8 @@ namespace FlappyBird
         {
             while (!gameOver)
             {
-                if (Console.ReadKey(true).Key == ConsoleKey.UpArrow)
+                ConsoleKey keyPressed = Console.ReadKey(true).Key;
+                if (keyPressed == ConsoleKey.UpArrow || keyPressed == ConsoleKey.Spacebar)
                 {
                     bird.Flap();
                 }

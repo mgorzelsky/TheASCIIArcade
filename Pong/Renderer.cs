@@ -45,11 +45,12 @@ namespace Pong
             Console.SetCursorPosition(widthOffset, heightOffset + 1);
             foreach (char character in thingToDraw)
             {
-                if (character.Equals('\a'))
+                if (character.Equals('\0'))
                 {
                     heightOffset++;
                     Console.SetCursorPosition(widthOffset, heightOffset + 1);
                 }
+                if (!character.Equals('\0'))
                     Console.Write(character);
             }
         }

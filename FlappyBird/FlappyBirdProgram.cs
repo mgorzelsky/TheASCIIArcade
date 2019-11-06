@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
 using System.Threading;
 
 namespace FlappyBird
@@ -8,20 +9,26 @@ namespace FlappyBird
     {
         public static int width = 120;
         public static int height = 30;
+
         public void StartFlappyBird()
         {
-
             Console.Clear();
             Console.CursorVisible = false;
-            //Console.SetWindowSize(1, 1);
-            //Console.SetBufferSize(width, height + 1);
-            //Console.SetWindowSize(width, height + 1);
-            
-            do
+
+            string[] flappyBirdSplash = File.ReadAllLines(@"..\..\..\txt\FlappyBirdSplash.txt");
+            string contributers = "Contributers: Ruying Chen, Michael Gorzelsky, Matt Juel, Chris Masters, Robert Schroeder";
+            string instructions = "Press the Up Arrow or Spacebar to flap higher";
+
+            Render renderer = new Render();
+            renderer.DrawGenericScreen(flappyBirdSplash, (width - flappyBirdSplash[3].Length)/2, 4);
+            renderer.DrawGenericScreen(contributers, (width - contributers.Length)/2, height - 1);
+            renderer.DrawGenericScreen(instructions, (width - instructions.Length)/2, height / 2);
+
+            Thread.Sleep(5000);
+
+            do //Eventually offer the option to play again without leaving the game
             {
                 Game game = new Game();
-                Console.WriteLine("Welcome to flappy bird in the terminal.");
-                Thread.Sleep(2000);
                 game.PlayGame();
             } while (false);
         }

@@ -1,0 +1,6 @@
+   SNAKE!
+   ____
+       |
+       *
+
+Single Player!
