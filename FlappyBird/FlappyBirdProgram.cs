@@ -26,7 +26,7 @@ namespace FlappyBird
 
             Thread.Sleep(5000);
 
-            do
+            do //Eventually offer the option to play again without leaving the game
             {
                 Game game = new Game();
                 game.PlayGame();

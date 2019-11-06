@@ -25,9 +25,9 @@ namespace Snake
             string instructions = "Use the arrow keys to turn. Avoid walls and yourself. Eat the food --> *";
 
             Render renderer = new Render();
-            renderer.DrawGenericScreen(snakeSplash, (consoleWidth - snakeSplash[5].Length) / 2, 1);
+            renderer.DrawGenericScreen(snakeSplash, (consoleWidth - snakeSplash[7].Length) / 2, 1);
             renderer.DrawGenericScreen(contributers, (consoleWidth - contributers.Length) / 2, consoleHeight - 1);
-            renderer.DrawGenericScreen(instructions, (consoleWidth - instructions.Length) / 2, consoleHeight / 2);
+            renderer.DrawGenericScreen(instructions, (consoleWidth - instructions.Length) / 2, consoleHeight / 2 + 2);
 
             Thread.Sleep(5000);
 
