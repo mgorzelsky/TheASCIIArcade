@@ -57,60 +57,65 @@ namespace TheASCIIArcade
             {
                 if (Program.currentSelection == new Point(0, 0))
                 {
-                    for (int y = 0; y < Program.height/2 - 1; y++)
-                    {
-                        for (int x = 0; x < Program.width/2 - 2; x++)
-                        {
-                            Console.SetCursorPosition(x, y);
-                            if (flashIncrementer == 0)
-                            {
-                                if (y == 0 && x == 0)
-                                    Console.Write("+");
-                                else if (y == 0 && x == Program.width / 2 - 3)
-                                    Console.Write("+");
-                                else if (y == Program.height / 2 - 2 && x == 0)
-                                    Console.Write("+");
-                                else if (y == Program.height / 2 - 2 && x == Program.width / 2 - 3)
-                                    Console.Write("+");
-                                else if (y == 0 || y == Program.height / 2 - 2)
-                                    Console.Write("-");
-                                else if (x == 0 || x == Program.width / 2 - 3)
-                                    Console.Write("|");
-                            }
-                            else
-                            {
-                                if (y == 0 && x == 0)
-                                    Console.Write("+", Color.Red);
-                                else if (y == 0 && x == Program.width / 2 - 3)
-                                    Console.Write("+", Color.Red);
-                                else if (y == Program.height / 2 - 2 && x == 0)
-                                    Console.Write("+", Color.Red);
-                                else if (y == Program.height / 2 - 2 && x == Program.width / 2 - 3)
-                                    Console.Write("+", Color.Red);
-                                else if (y == 0 || y == Program.height / 2 - 2)
-                                    Console.Write("-", Color.Red);
-                                else if (x == 0 || x == Program.width / 2 - 3)
-                                    Console.Write("|", Color.Red);
-                            }
-                        }
-                    }
+                    FlashySquare(0, 0, flashIncrementer);
                 }
                 if (Program.currentSelection == new Point(0, 1))
                 {
-
+                    FlashySquare(0, Program.height / 2, flashIncrementer);
                 }
                 if (Program.currentSelection == new Point(1, 0))
                 {
-
+                    FlashySquare(Program.width / 2, 0, flashIncrementer);
                 }
                 if (Program.currentSelection == new Point(1, 1))
                 {
-
+                    FlashySquare(Program.width / 2, Program.height / 2, flashIncrementer);
                 }
                 flashIncrementer++;
                 if (flashIncrementer > 1)
                     flashIncrementer = 0;
                 Thread.Sleep(200);
+            }
+        }
+
+        private void FlashySquare(int xOffset, int yOffset, int flashIncrementer)
+        {
+            for (int y = yOffset; y < (Program.height / 2 - 1) + yOffset; y++)
+            {
+                for (int x = xOffset; x < (Program.width / 2 - 2) + xOffset; x++)
+                {
+                    Console.SetCursorPosition(x, y);
+                    if (flashIncrementer == 0)
+                    {
+                        if (y == 0 + yOffset && x == 0 + xOffset)
+                            Console.Write("+");
+                        else if (y == 0 && x == (Program.width / 2 - 3) + xOffset)
+                            Console.Write("+");
+                        else if (y == (Program.height / 2 - 2) + yOffset && x == 0)
+                            Console.Write("+");
+                        else if (y == (Program.height / 2 - 2) + yOffset && x == (Program.width / 2 - 3) + xOffset)
+                            Console.Write("+");
+                        else if (y == 0 || y == (Program.height / 2 - 2) + yOffset)
+                            Console.Write("-");
+                        else if (x == 0 || x == (Program.width / 2 - 3) + xOffset)
+                            Console.Write("|");
+                    }
+                    else
+                    {
+                        if (y == 0 + yOffset && x == 0 + xOffset)
+                            Console.Write("+", Color.Red);
+                        else if (y == 0 && x == (Program.width / 2 - 3) + xOffset)
+                            Console.Write("+", Color.Red);
+                        else if (y == (Program.height / 2 - 2) + yOffset && x == 0)
+                            Console.Write("+", Color.Red);
+                        else if (y == (Program.height / 2 - 2) + yOffset && x == (Program.width / 2 - 3) + xOffset)
+                            Console.Write("+", Color.Red);
+                        else if (y == 0 || y == (Program.height / 2 - 2) + yOffset)
+                            Console.Write("-", Color.Red);
+                        else if (x == 0 || x == (Program.width / 2 - 3) + xOffset)
+                            Console.Write("|", Color.Red);
+                    }
+                }
             }
         }
     }
