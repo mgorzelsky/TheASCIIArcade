@@ -95,7 +95,8 @@ namespace FlappyBird
         {
             while (!gameOver)
             {
-                if (Console.ReadKey(true).Key == ConsoleKey.UpArrow)
+                ConsoleKey keyPressed = Console.ReadKey(true).Key;
+                if (keyPressed == ConsoleKey.UpArrow || keyPressed == ConsoleKey.Spacebar)
                 {
                     bird.Flap();
                 }
