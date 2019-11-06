@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Threading;
 
 namespace Snake
 {
@@ -13,6 +15,22 @@ namespace Snake
         //high scores, and restarting after loss.
         public void StartSnake()
         {
+            int consoleWidth = 120;
+            int consoleHeight = 25;
+            Console.Clear();
+            Console.CursorVisible = false;
+
+            string[] snakeSplash = File.ReadAllLines(@"..\..\..\txt\SnakeSplash.txt");
+            string contributers = "Contributers: Michael Barta, Michael Gorzelsky, Radiah Jones";
+            string instructions = "Use the arrow keys to turn. Avoid walls and yourself. Eat the food --> *";
+
+            Render renderer = new Render();
+            renderer.DrawGenericScreen(snakeSplash, (consoleWidth - snakeSplash[5].Length) / 2, 1);
+            renderer.DrawGenericScreen(contributers, (consoleWidth - contributers.Length) / 2, consoleHeight - 1);
+            renderer.DrawGenericScreen(instructions, (consoleWidth - instructions.Length) / 2, consoleHeight / 2);
+
+            Thread.Sleep(5000);
+
             bool playAgain = true;
             while (playAgain)
             {
