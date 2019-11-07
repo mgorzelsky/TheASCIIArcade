@@ -72,38 +72,42 @@ namespace TheASCIIArcade
                 //4 choices.
                 while (!selectionIsMade)
                 {
-                    switch (Console.ReadKey(true).Key)
+                    while (Console.KeyAvailable) Console.ReadKey(true);
+                    if (Console.KeyAvailable != true)
                     {
-                        case (ConsoleKey.UpArrow):
-                            if (currentSelection.Y - 1 < 0)
-                                currentSelection.Y = 0;
-                            else
-                                currentSelection.Y--;
-                            break;
-                        case (ConsoleKey.LeftArrow):
-                            if (currentSelection.X - 1 < 0)
-                                currentSelection.X = 0;
-                            else
-                                currentSelection.X--;
-                            break;
-                        case (ConsoleKey.DownArrow):
-                            if (currentSelection.Y + 1 > 1)
-                                currentSelection.Y = 1;
-                            else
-                                currentSelection.Y++;
-                            break;
-                        case (ConsoleKey.RightArrow):
-                            if (currentSelection.X + 1 > 1)
-                                currentSelection.X = 1;
-                            else
-                                currentSelection.X++;
-                            break;
-                        case (ConsoleKey.Enter):
-                            selectionIsMade = true;
-                            break;
-                        case (ConsoleKey.Q):
-                            selectionIsMade = true;
-                            return; //returns out of main method, ending program.
+                        switch (Console.ReadKey(true).Key)
+                        {
+                            case (ConsoleKey.UpArrow):
+                                if (currentSelection.Y - 1 < 0)
+                                    currentSelection.Y = 0;
+                                else
+                                    currentSelection.Y--;
+                                break;
+                            case (ConsoleKey.LeftArrow):
+                                if (currentSelection.X - 1 < 0)
+                                    currentSelection.X = 0;
+                                else
+                                    currentSelection.X--;
+                                break;
+                            case (ConsoleKey.DownArrow):
+                                if (currentSelection.Y + 1 > 1)
+                                    currentSelection.Y = 1;
+                                else
+                                    currentSelection.Y++;
+                                break;
+                            case (ConsoleKey.RightArrow):
+                                if (currentSelection.X + 1 > 1)
+                                    currentSelection.X = 1;
+                                else
+                                    currentSelection.X++;
+                                break;
+                            case (ConsoleKey.Enter):
+                                selectionIsMade = true;
+                                break;
+                            case (ConsoleKey.Q):
+                                selectionIsMade = true;
+                                return; //returns out of main method, ending program.
+                        }
                     }
                 }
                 //Once enter or Q is pressed move from loop into here where it launches the program based on the current
