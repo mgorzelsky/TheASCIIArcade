@@ -9,15 +9,12 @@ namespace FlappyBird
 {
     public class Wall
     {
-
         private int currentX = FlappyBirdProgram.width - 1; // starts at the right edge of the screen
         public int gap = 12;
         public int offset;
         Random rnd;
         private int speed = 1;
         private int[] wall;
-
-
 
         public Wall()
         {
@@ -28,7 +25,6 @@ namespace FlappyBird
             WallBuilder();
 
         }
-
 
         // returns the current x position of the wall
         public int getCurrentX()
@@ -49,6 +45,7 @@ namespace FlappyBird
             return wall;
         }
 
+        //Builds a wall with a gap placed in a random location
         void WallBuilder()
         {
             int wallGap = rnd.Next(0, offset);

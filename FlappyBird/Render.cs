@@ -38,14 +38,15 @@ namespace FlappyBird
                                 break;
                         }
                     }
-                    screenAsString.Append(new char[] { currentCharacter });
+                    screenAsString.Append(currentCharacter);
 
                 }
-                Console.CursorVisible = false;
-                Console.SetCursorPosition(0, y);
+                Console.CursorVisible = false;   //Writes each line to the screen before then building a new string for the next line
+                Console.SetCursorPosition(0, y); //Uses the y value to increment down the rows for each string.
                 Console.Write(screenAsString);
             }
         }
+        //same as TheASCIIArcade.Draw
         public void DrawGenericScreen(string thingToDraw, int widthOffset, int heightOffset)
         {
             Console.SetCursorPosition(widthOffset, heightOffset);
