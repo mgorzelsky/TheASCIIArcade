@@ -5,11 +5,13 @@ VisualStudioVersion = 16.0.29424.173
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheASCIIArcade", "TheASCIIArcade\TheASCIIArcade.csproj", "{9022001B-7CDE-4AE6-A278-D47E9101EB6E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlappyBird", "FlappyBird\FlappyBird.csproj", "{8D675095-9BE4-4C58-9A41-BF97EA9B48A0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FlappyBird", "FlappyBird\FlappyBird.csproj", "{8D675095-9BE4-4C58-9A41-BF97EA9B48A0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Snake", "Snake\Snake.csproj", "{36A824AB-172D-49DB-9597-A29725541FE7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snake", "Snake\Snake.csproj", "{36A824AB-172D-49DB-9597-A29725541FE7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Pong", "Pong\Pong.csproj", "{7E1D95D4-6B2C-498F-96B5-D3568774C8C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pong", "Pong\Pong.csproj", "{7E1D95D4-6B2C-498F-96B5-D3568774C8C9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EscapeFromDarkForest", "EscapeFromDarkForest\EscapeFromDarkForest.csproj", "{13C1C457-320B-4F63-AC0A-3922FA6C8A28}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{7E1D95D4-6B2C-498F-96B5-D3568774C8C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E1D95D4-6B2C-498F-96B5-D3568774C8C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E1D95D4-6B2C-498F-96B5-D3568774C8C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13C1C457-320B-4F63-AC0A-3922FA6C8A28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13C1C457-320B-4F63-AC0A-3922FA6C8A28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13C1C457-320B-4F63-AC0A-3922FA6C8A28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13C1C457-320B-4F63-AC0A-3922FA6C8A28}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
