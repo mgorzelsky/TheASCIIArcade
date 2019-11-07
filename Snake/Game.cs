@@ -35,10 +35,11 @@ namespace Snake
             Console.Clear();
             Console.CursorVisible = false;
 
+            //This event controls the speed of the snake.
             timer.Elapsed += new ElapsedEventHandler(OnTimedEvent);
             timer.Start();
 
-            //Waiting for player input while the rest of the state runs on a timer
+            //Waiting for player input while the rest of the game runs on a timer
             while (gameRunning)
             {
                 ConsoleKey snakeDirection = Console.ReadKey(true).Key;
@@ -70,7 +71,7 @@ namespace Snake
         private void OnTimedEvent(Object source, ElapsedEventArgs e)
         {
             Step();
-
+            //important that the speed only increases when the snake has eaten otherwise the snake will speed up constantly
             if (tickSpeed > 100 && score % 10 == 0 && hasEaten)
             {
                 timer.Interval -= 10;
@@ -98,6 +99,7 @@ namespace Snake
                     gameBoard[segment.X, segment.Y] = StateOfLocation.Snake;
                 }
             }
+            //Game over stops the timer, cleans up everything, and writes the game over messages.
             else
             {
                 timer.Stop();

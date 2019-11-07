@@ -7,12 +7,10 @@ namespace Snake
 {
     public class SnakeProgram
     {
+        //height and width will be referenced many times throughout the game. They can be changed here and the
+        //rest will dynamically adjust
         public static int width = 50;
         public static int height = 20;
-        private List<int> scores = new List<int>();
-
-        //Provides a starting point for the game itself. Will be used later for menu options such as difficulty,
-        //high scores, and restarting after loss.
         public void StartSnake()
         {
             int consoleWidth = 120;
@@ -20,6 +18,7 @@ namespace Snake
             Console.Clear();
             Console.CursorVisible = false;
 
+            //Grab the appropriate images and put them in variables, then write them to the screen. Wait 5 seconds, then move on.
             string[] snakeSplash = File.ReadAllLines(@"txt\SnakeSplash.txt");
             string contributers = "Contributers: Michael Barta, Michael Gorzelsky, Radiah Jones";
             string instructions = "Use the arrow keys to turn. Avoid walls and yourself. Eat the food --> *";
@@ -31,33 +30,9 @@ namespace Snake
 
             Thread.Sleep(5000);
 
-            //bool playAgain = true;
-            //while (playAgain)
-            //{
-                Console.Clear();
-                Game game = new Game();
-                int score = game.PlayGame();
-
-                AddScoreToHighscores(score);
-
-                //string playAgainMessage = "Play Again? Y/N";
-                //Console.SetCursorPosition((width - playAgainMessage.Length) / 2, height / 2);
-
-            //    ConsoleKey playAgainChoice = Console.ReadKey(true).Key;
-            //    if (playAgainChoice != ConsoleKey.Y)
-            //        playAgain = false;
-            //}
-        }
-
-        public List<int> GetScores()
-        {
-            return scores;
-        }
-        public void AddScoreToHighscores(int recentScore)
-        {
-            scores.Add(recentScore);
-            scores.Sort();
-            scores.Reverse();
+            Console.Clear();
+            Game game = new Game();
+            int score = game.PlayGame(); //PlayGame return an int score to be used in the future for score tracking.
         }
     }
 }

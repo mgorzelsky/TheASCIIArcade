@@ -22,7 +22,7 @@ namespace Snake
             foodPosition.Y = y;
         }
 
-        // changes the position of the food on the screen randomly based on the size of the screen size sent in the width & height variables
+        // changes the position of the food on the screen randomly based on the size of the screen size
         public void ChangeFoodPosition()
         {
             bool tryAgain = false;
