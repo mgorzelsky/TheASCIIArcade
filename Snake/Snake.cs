@@ -9,10 +9,10 @@ namespace Snake
     class Snake
     {
 
-        private static List<Point> body;
-        private static Point headPos;
-        private static Point tailPos;
-        private static int currentDirection = (int)Direction.Down;
+        private List<Point> body;
+        private Point headPos;
+        private Point tailPos;
+        private int currentDirection = (int)Direction.Down;
         private Point oldPosition1;
 
         public Snake()
