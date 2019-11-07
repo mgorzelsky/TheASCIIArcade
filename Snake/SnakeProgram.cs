@@ -20,7 +20,7 @@ namespace Snake
             Console.Clear();
             Console.CursorVisible = false;
 
-            string[] snakeSplash = File.ReadAllLines(@"..\..\..\txt\SnakeSplash.txt");
+            string[] snakeSplash = File.ReadAllLines(@"txt\SnakeSplash.txt");
             string contributers = "Contributers: Michael Barta, Michael Gorzelsky, Radiah Jones";
             string instructions = "Use the arrow keys to turn. Avoid walls and yourself. Eat the food --> *";
 

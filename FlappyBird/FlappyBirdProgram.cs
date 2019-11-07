@@ -15,7 +15,7 @@ namespace FlappyBird
             Console.Clear();
             Console.CursorVisible = false;
 
-            string[] flappyBirdSplash = File.ReadAllLines(@"..\..\..\txt\FlappyBirdSplash.txt");
+            string[] flappyBirdSplash = File.ReadAllLines(@"txt\FlappyBirdSplash.txt");
             string contributers = "Contributers: Ruying Chen, Michael Gorzelsky, Matt Juel, Chris Masters, Robert Schroeder";
             string instructions = "Press the Up Arrow or Spacebar to flap higher";
 

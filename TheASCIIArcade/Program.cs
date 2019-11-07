@@ -27,11 +27,11 @@ namespace TheASCIIArcade
             PongProgram pong = new PongProgram();
 
 
-            string[] arcadeLogo = File.ReadAllLines(@"..\..\..\txt\logo.txt");
-            string[] pongLogo = File.ReadAllLines(@"..\..\..\txt\PongLogo.txt"); //character width 11
-            string[] dungeonCrawlerLogo = File.ReadAllLines(@"..\..\..\txt\DungeonCrawlerLogo.txt"); //character width 13
-            string[] flappyBirdLogo = File.ReadAllLines(@"..\..\..\txt\FlappyBirdLogo.txt"); //character width 13
-            string[] snakeLogo = File.ReadAllLines(@"..\..\..\txt\SnakeLogo.txt"); //character width 13
+            string[] arcadeLogo = File.ReadAllLines(@"txt\logo.txt");
+            string[] pongLogo = File.ReadAllLines(@"txt\PongLogo.txt"); //character width 11
+            string[] dungeonCrawlerLogo = File.ReadAllLines(@"txt\DungeonCrawlerLogo.txt"); //character width 13
+            string[] flappyBirdLogo = File.ReadAllLines(@"txt\FlappyBirdLogo.txt"); //character width 13
+            string[] snakeLogo = File.ReadAllLines(@"txt\SnakeLogo.txt"); //character width 13
             string contributers = "Contributers: Michael Gorzelsky";
             string instructions = @"Use the arrow ^ keys to move your selection, Enter| to confirm it." + "\0" +
                                    "            < V >                                <-";
