@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Snake", "Snake\Snake.csproj
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Pong", "Pong\Pong.csproj", "{7E1D95D4-6B2C-498F-96B5-D3568774C8C9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EscapeFromDarkForest", "EscapeFromDarkForest\EscapeFromDarkForest.csproj", "{13C1C457-320B-4F63-AC0A-3922FA6C8A28}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EscapeFromDarkForest", "EscapeFromDarkForest\EscapeFromDarkForest.csproj", "{13C1C457-320B-4F63-AC0A-3922FA6C8A28}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

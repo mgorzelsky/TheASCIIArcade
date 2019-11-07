@@ -2,10 +2,10 @@
 using FlappyBird;
 using Snake;
 using Pong;
+using EscapeFromDarkForest;
 using System.Threading;
 using System.IO;
 using System.Drawing;
-using System.Diagnostics;
 
 namespace TheASCIIArcade
 {
@@ -21,11 +21,6 @@ namespace TheASCIIArcade
             draw = new Draw();
             Console.CursorVisible = false;
             Thread selectionBox = new Thread(draw.DrawSelectionBox);
-
-            FlappyBirdProgram flappyBird = new FlappyBirdProgram();
-            SnakeProgram snake = new SnakeProgram();
-            PongProgram pong = new PongProgram();
-
 
             string[] arcadeLogo = File.ReadAllLines(@"txt\logo.txt");
             string[] pongLogo = File.ReadAllLines(@"txt\PongLogo.txt"); //character width 11
@@ -108,6 +103,7 @@ namespace TheASCIIArcade
                 {
                     selectionBox.Join();
                     threadRunning = false;
+                    PongProgram pong = new PongProgram();
                     pong.StartPong();
                     selectionIsMade = false;
                     Console.Clear();
@@ -116,7 +112,8 @@ namespace TheASCIIArcade
                 {
                     selectionBox.Join();
                     threadRunning = false;
-                    Debug.WriteLine("not yet available");
+                    EscapeFromDarkForestProgram forest = new EscapeFromDarkForestProgram();
+                    forest.Start();
                     selectionIsMade = false;
                     Console.Clear();
                 }
@@ -124,6 +121,7 @@ namespace TheASCIIArcade
                 {
                     selectionBox.Join();
                     threadRunning = false;
+                    FlappyBirdProgram flappyBird = new FlappyBirdProgram();
                     flappyBird.StartFlappyBird();
                     selectionIsMade = false;
                     Console.Clear();
@@ -132,6 +130,7 @@ namespace TheASCIIArcade
                 {
                     selectionBox.Join();
                     threadRunning = false;
+                    SnakeProgram snake = new SnakeProgram();
                     snake.StartSnake();
                     selectionIsMade = false;
                     Console.Clear();
