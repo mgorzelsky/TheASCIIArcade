@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\EscapeFromDarkForest\EscapeFromDarkForest.csproj" />
     <ProjectReference Include="..\FlappyBird\FlappyBird.csproj" />
     <ProjectReference Include="..\Pong\Pong.csproj" />
     <ProjectReference Include="..\Snake\Snake.csproj" />

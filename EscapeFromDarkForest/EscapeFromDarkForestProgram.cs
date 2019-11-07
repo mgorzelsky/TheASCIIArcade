@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace EscapeFromDarkForest
 {
-    class EscapeFromDarkForest
+    public class EscapeFromDarkForestProgram
     {
         public static Game game;
         public static int width = 100;

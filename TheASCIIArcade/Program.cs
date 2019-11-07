@@ -2,10 +2,10 @@
 using FlappyBird;
 using Snake;
 using Pong;
+using EscapeFromDarkForest;
 using System.Threading;
 using System.IO;
 using System.Drawing;
-using System.Diagnostics;
 
 namespace TheASCIIArcade
 {
@@ -25,7 +25,7 @@ namespace TheASCIIArcade
             FlappyBirdProgram flappyBird = new FlappyBirdProgram();
             SnakeProgram snake = new SnakeProgram();
             PongProgram pong = new PongProgram();
-
+            EscapeFromDarkForestProgram forest = new EscapeFromDarkForestProgram();
 
             string[] arcadeLogo = File.ReadAllLines(@"txt\logo.txt");
             string[] pongLogo = File.ReadAllLines(@"txt\PongLogo.txt"); //character width 11
@@ -116,7 +116,7 @@ namespace TheASCIIArcade
                 {
                     selectionBox.Join();
                     threadRunning = false;
-                    Debug.WriteLine("not yet available");
+                    forest.Start();
                     selectionIsMade = false;
                     Console.Clear();
                 }

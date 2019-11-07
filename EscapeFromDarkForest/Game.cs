@@ -5,8 +5,8 @@ using System.Drawing;
 
 namespace EscapeFromDarkForest
 {
-    enum GameObjects { empty, player, enemy, food,  wall, exit };
-    class Game
+    public enum GameObjects { empty, player, enemy, food,  wall, exit };
+    public class Game
     {
         //These are static so they can be referenced across the program instead of having to be constantly
         //passed around methods.
@@ -31,7 +31,7 @@ namespace EscapeFromDarkForest
 
         public void Start()
         {
-            player = new Player(EscapeFromDarkForest.game);
+            player = new Player(EscapeFromDarkForestProgram.game);
             renderer = new Renderer(player);
 
             gameBoard = new GameObjects[8, 8];
@@ -207,39 +207,39 @@ namespace EscapeFromDarkForest
 
         private void PlayAgain()
         {
-            EscapeFromDarkForest.DrawGenericScreen($"Game Over. You made it {level} levels.", (EscapeFromDarkForest.width - 33) / 2, EscapeFromDarkForest.height / 2 - 2);
-            EscapeFromDarkForest.DrawGenericScreen("Would you like to play again? Y/N", (EscapeFromDarkForest.width - 33) / 2, EscapeFromDarkForest.height / 2);
+            EscapeFromDarkForestProgram.DrawGenericScreen($"Game Over. You made it {level} levels.", (EscapeFromDarkForestProgram.width - 33) / 2, EscapeFromDarkForestProgram.height / 2 - 2);
+            EscapeFromDarkForestProgram.DrawGenericScreen("Would you like to play again? Y/N", (EscapeFromDarkForestProgram.width - 33) / 2, EscapeFromDarkForestProgram.height / 2);
             bool validChoice = false;
             while (!validChoice)
             {
                 switch (Console.ReadKey(true).Key)
                 {
                     case (ConsoleKey.Y):
-                        EscapeFromDarkForest.playAgain = true;
+                        EscapeFromDarkForestProgram.playAgain = true;
                         validChoice = true;
                         break;
                     case (ConsoleKey.N):
-                        EscapeFromDarkForest.playAgain = false;
-                        EscapeFromDarkForest.viewInstructions = false;
+                        EscapeFromDarkForestProgram.playAgain = false;
+                        EscapeFromDarkForestProgram.viewInstructions = false;
                         validChoice = true;
                         break;
                 }
             }
-            if (EscapeFromDarkForest.playAgain)
+            if (EscapeFromDarkForestProgram.playAgain)
             {
-                EscapeFromDarkForest.DrawGenericScreen("Do you wish to view the instructions? Y/N", (EscapeFromDarkForest.width - 41) / 2, EscapeFromDarkForest.height / 2 + 2);
+                EscapeFromDarkForestProgram.DrawGenericScreen("Do you wish to view the instructions? Y/N", (EscapeFromDarkForestProgram.width - 41) / 2, EscapeFromDarkForestProgram.height / 2 + 2);
                 validChoice = false;
                 while (!validChoice)
                 {
                     switch (Console.ReadKey(true).Key)
                     {
                         case (ConsoleKey.Y):
-                            EscapeFromDarkForest.viewInstructions = true;
-                            EscapeFromDarkForest.playAgain = false;
+                            EscapeFromDarkForestProgram.viewInstructions = true;
+                            EscapeFromDarkForestProgram.playAgain = false;
                             validChoice = true;
                             break;
                         case (ConsoleKey.N):
-                            EscapeFromDarkForest.viewInstructions = false;
+                            EscapeFromDarkForestProgram.viewInstructions = false;
                             validChoice = true;
                             break;
                     }
