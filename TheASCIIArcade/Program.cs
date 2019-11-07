@@ -22,11 +22,6 @@ namespace TheASCIIArcade
             Console.CursorVisible = false;
             Thread selectionBox = new Thread(draw.DrawSelectionBox);
 
-            FlappyBirdProgram flappyBird = new FlappyBirdProgram();
-            SnakeProgram snake = new SnakeProgram();
-            PongProgram pong = new PongProgram();
-            EscapeFromDarkForestProgram forest = new EscapeFromDarkForestProgram();
-
             string[] arcadeLogo = File.ReadAllLines(@"txt\logo.txt");
             string[] pongLogo = File.ReadAllLines(@"txt\PongLogo.txt"); //character width 11
             string[] dungeonCrawlerLogo = File.ReadAllLines(@"txt\DungeonCrawlerLogo.txt"); //character width 13
@@ -108,6 +103,7 @@ namespace TheASCIIArcade
                 {
                     selectionBox.Join();
                     threadRunning = false;
+                    PongProgram pong = new PongProgram();
                     pong.StartPong();
                     selectionIsMade = false;
                     Console.Clear();
@@ -116,6 +112,7 @@ namespace TheASCIIArcade
                 {
                     selectionBox.Join();
                     threadRunning = false;
+                    EscapeFromDarkForestProgram forest = new EscapeFromDarkForestProgram();
                     forest.Start();
                     selectionIsMade = false;
                     Console.Clear();
@@ -124,6 +121,7 @@ namespace TheASCIIArcade
                 {
                     selectionBox.Join();
                     threadRunning = false;
+                    FlappyBirdProgram flappyBird = new FlappyBirdProgram();
                     flappyBird.StartFlappyBird();
                     selectionIsMade = false;
                     Console.Clear();
@@ -132,6 +130,7 @@ namespace TheASCIIArcade
                 {
                     selectionBox.Join();
                     threadRunning = false;
+                    SnakeProgram snake = new SnakeProgram();
                     snake.StartSnake();
                     selectionIsMade = false;
                     Console.Clear();
