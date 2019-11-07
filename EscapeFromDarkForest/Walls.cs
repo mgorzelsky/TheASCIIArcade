@@ -5,7 +5,7 @@ namespace EscapeFromDarkForest
 {
     class Walls
     {
-        private static Point noZone1;
+        private static Point noZone1; //noZones are to keep walls from spawing at the player spawn or in the exit.
         private static Point noZone2;
         private Point position;
         public Point Position { get { return position; } }
@@ -16,7 +16,7 @@ namespace EscapeFromDarkForest
             noZone2 = new Point(7, 0);
             GeneratePosition();
         }
-
+        //Each wall just generates and holds a position. They cannot generate on top of themselves.
         private void GeneratePosition()
         {
             while (true)

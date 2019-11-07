@@ -24,7 +24,8 @@ namespace EscapeFromDarkForest
             position.X = 0;
             position.Y = 7;
         }
-
+        //take in the player input. If empty space or food allow movement and use a food. If wall destroy that wall and use a food.
+        //If OOB or Enemy don't move and don't use food.
         public bool Move(ConsoleKey direction)
         {
             switch (direction)
@@ -111,12 +112,13 @@ namespace EscapeFromDarkForest
             return false;
         }
 
+        //When eating food increase the current food meter by the specified amount.
         public void Eat()
         {
             food += 20;
             Debug.WriteLine("Om nom nom nom...");
         }
-
+        //When attacked remove food at the specified amount.
         public void TakeDamage()
         {
             food -= 10;
