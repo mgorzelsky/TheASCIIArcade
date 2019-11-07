@@ -9,11 +9,11 @@ namespace Pong
     {
         private readonly string paddleSide;
         private int paddleCenter;
-        public Point[] PaddlePosition { get; } = new Point[5];
+        public Point[] PaddlePosition { get; } = new Point[5]; //paddle is a 5 long point array
 
         public Paddle(string paddleSide)
         {
-            this.paddleSide = paddleSide;
+            this.paddleSide = paddleSide; //identifier as to which paddle the paddle object is
             paddleCenter = Game.Height / 2;
             NewPaddlePosition();    //Set up initial paddle position
         }
@@ -41,6 +41,7 @@ namespace Pong
             }
         }
 
+        //Controls paddle movement, up/down for the right paddle, A/Z for the left.
         public void PaddleMove(ConsoleKey keyPressed)
         {
             if (paddleSide == "right")

@@ -6,8 +6,8 @@ namespace Pong
     public class PongProgram
     {
         //Clear the console and set CursorVisible to false so they do not visually distract.
-        //Instantiate the game, set the static variables for the size of game desired. Start the
-        //main game loop.
+        //Instantiate the game, set the static variables for the size of game desired by passing them in
+        //to the constructor. Then start the main game loop.
         public void StartPong()
         {
             Console.Clear();

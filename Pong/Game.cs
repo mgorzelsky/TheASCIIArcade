@@ -33,6 +33,8 @@ namespace Pong
 
         public void Start()
         {
+            //Input runs on its own thread so the game loop can continue as it wants. More simple than using timers
+            //and events.
             Thread inputThread = new Thread(WaitForInput);
             inputThread.Start();
 
@@ -78,7 +80,7 @@ namespace Pong
                     Thread.Sleep(1000 / 60000);
                 }
 
-                //Increment the score for the winner of round
+                //Increment the score for the winner of round and display it under the game area.
                 if (ball.BallPosition.X == 0)
                     rightScore++;
                 if (ball.BallPosition.X == Width - 1)
@@ -110,8 +112,7 @@ namespace Pong
 
             Console.SetCursorPosition(Width / 3, Height - 2);
             Console.Write("Press any key to continue");
-            //Thread.Sleep(3000);
-            inputThread.Join();
+            inputThread.Join(); //make sure to clean up the loose thread so it is gone when going back to the arcade
         }
 
         private void SetGoalLines()
