@@ -91,7 +91,7 @@ namespace EscapeFromDarkForest
                 level++;
                 Thread.Sleep(500);
             }
-            renderThread.Join();
+            renderThread.Join(); //Wait for rendering to finish before displaying game over so that it doesn't hijack the screen.
             PlayAgain();
         }
 
@@ -168,6 +168,7 @@ namespace EscapeFromDarkForest
             }
         }
 
+        //Build a list of the number of walls that will be present on the current level.
         private void WallBuilder()
         {
             int numberOfWalls = rnd.Next(5, 9);
@@ -178,6 +179,7 @@ namespace EscapeFromDarkForest
             }
         }
 
+        //Build a list of the number of foods present on the current level.
         private void FoodBuilder()
         {
             int numberOfFoods;
@@ -195,7 +197,7 @@ namespace EscapeFromDarkForest
                     listOfFood.Add(new Food());
             }
         }
-
+        //When the player attacks a wall remove the wall they attack from the list.
         public void RemoveWallAt(Point p)
         {
             for (int i = 0; i < listOfWalls.Count; i++)
@@ -204,7 +206,7 @@ namespace EscapeFromDarkForest
                     listOfWalls.RemoveAt(i);
             }
         }
-
+        //Display game over and ask if the player wishes to play again, if they do give the option to view the instructions again.
         private void PlayAgain()
         {
             EscapeFromDarkForestProgram.DrawGenericScreen($"Game Over. You made it {level} levels.", (EscapeFromDarkForestProgram.width - 33) / 2, EscapeFromDarkForestProgram.height / 2 - 2);

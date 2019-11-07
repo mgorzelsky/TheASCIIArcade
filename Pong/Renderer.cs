@@ -6,6 +6,7 @@ namespace Pong
 {
     public class Renderer
     {
+        //Turn the GameItems[,] into a string that then draws to the screen.
         public void DrawGame(GameItems [,] screenArray)
         {
             StringBuilder screenAsString = new StringBuilder("", Game.Width * Game.Height);
@@ -34,12 +35,13 @@ namespace Pong
                     }
                     screenAsString.Append(new char[] { currentCharacter });
                 }
-                screenAsString.Append(Environment.NewLine);
+                screenAsString.Append(Environment.NewLine); //append line breaks to the string so that it auto-returns at the appropriate point
             }
             Console.SetCursorPosition(0, 0);
             Console.Write(screenAsString);
         }
 
+        //same as in TheASCIIArcade.Draw
         public void DrawGenericScreen(string thingToDraw, int widthOffset, int heightOffset)
         {
             Console.SetCursorPosition(widthOffset, heightOffset + 1);

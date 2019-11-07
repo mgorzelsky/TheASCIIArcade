@@ -5,12 +5,8 @@ namespace Snake
 {
     class Render
     {
-        //  methods
-
-        /// <summary>
-        ///  DrawScreen: Takes an array of states, saves them in a string, then prints on console
-        /// </summary>
-        /// <param name="gameBoard"></param>
+        //Checks the gameBoard and draws out the gameBoard on the screen. Uses stringbuilder so that the console is
+        //never cleared, preventing flashing.
         public void DrawScreen()
         {
             StringBuilder screenBuffer = new StringBuilder(Game.gameBoard.Length);
@@ -58,6 +54,8 @@ namespace Snake
             Console.SetCursorPosition(0, 0);
             Console.Write(screenBuffer);
         }
+
+        //Same methods as in TheASCIIArade.Program.Draw
         public void DrawGenericScreen(string thingToDraw, int widthOffset, int heightOffset)
         {
             Console.SetCursorPosition(widthOffset, heightOffset);

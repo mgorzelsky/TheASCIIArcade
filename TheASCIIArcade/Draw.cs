@@ -8,6 +8,7 @@ namespace TheASCIIArcade
 {
     class Draw
     {
+        //2 overlaods. Draws the input string or string[] with positioning based on the supplied width and height offset.
         public void DrawGenericScreen(string thingToDraw, int widthOffset, int heightOffset)
         {
             Console.SetCursorPosition(widthOffset, heightOffset);
@@ -34,22 +35,25 @@ namespace TheASCIIArcade
             }
         }
 
-        public void DrawLines(string thingToDraw, int widthOffset, int heightOffset, int numberOfChars, bool isVerticle)
+        //Takes in a character with a height and width offset and draws it the size of the screen in a straight line. Bool
+        //to tell if it draws verticle or horizontal.
+        public void DrawLines(char charToDraw, int widthOffset, int heightOffset, int numberOfChars, bool isVerticle)
         {
             if (isVerticle)
                 for (int y = heightOffset; y < numberOfChars; y++)
                 {
                     Console.SetCursorPosition(widthOffset, y);
-                    Console.Write(thingToDraw);
+                    Console.Write(charToDraw);
                 }
             else
                 for (int x = widthOffset; x < numberOfChars; x++)
                 {
                     Console.SetCursorPosition(x, heightOffset);
-                    Console.Write(thingToDraw);
+                    Console.Write(charToDraw);
                 }
         }
 
+        //Runs on a seperate thread. re-drawing the selection box based on a sleep timer. Flashes between white and red.
         public void DrawSelectionBox()
         {
             int flashIncrementer = 0;
@@ -79,6 +83,7 @@ namespace TheASCIIArcade
             }
         }
 
+        //abstracted out logic for drawing the square
         private void FlashySquare(int xOffset, int yOffset, int flashIncrementer)
         {
             for (int y = yOffset; y < (Program.height / 2 - 1) + yOffset; y++)
@@ -119,6 +124,8 @@ namespace TheASCIIArcade
                 }
             }
         }
+        //Call SquareEraser Every time through the DrawSquare method. It will erase any square that exists outside of
+        //the current selection without erasing whats inside of that square.
         private void SquareEraser()
         {
             if (Program.currentSelection == new Point(0, 0))

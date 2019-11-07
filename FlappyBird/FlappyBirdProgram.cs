@@ -12,6 +12,7 @@ namespace FlappyBird
 
         public void StartFlappyBird()
         {
+            //Draw the splash screen, wait 5 seconds, then create and start the game.
             Console.Clear();
             Console.CursorVisible = false;
 
